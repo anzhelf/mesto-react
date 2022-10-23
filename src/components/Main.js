@@ -13,6 +13,11 @@ function handleAddPlaceClick() {
   console.log(document.querySelector('.popup_type_add'));
 }
 
+function deleteCard() {
+  document.querySelector('.popup_type_delete').classList.add('popup_opened');
+  console.log(document.querySelector('.popup_type_delete'));
+}
+
 function Main() {
   return (
     <main className="content">
