@@ -1,3 +1,6 @@
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -10,18 +13,45 @@ import '../index.css';
 
 function App() {
 
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+
+  function handleEditAvatarClick() {
+    setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
+  }
+
+  function handleEditProfileClick() {
+    setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
+  }
+
+  function handleAddPlaceClick() {
+    setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
+  }
+
+  function closeAllPopups() {
+    setIsEditAvatarPopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+  }
+
   return (
     <div className="page">
 
       <Header />
-      <Main />
+      <Main
+        onEditAvatar={handleEditAvatarClick}
+        onEditProfile={handleEditProfileClick}
+        onAddPlace={handleAddPlaceClick}
+      />
       <Footer />
 
       <PopupWithForm
         name='avatar'
         title='Обновить аватар'
         buttonSave='Сохранить'
-        onEditAvatar=''
+        isOpen={isEditAvatarPopupOpen}
+        onClose={closeAllPopups}
       >
         <label className="popup__label popup__label_last-element">
           <input name='avatar' type="url" id="avatar" placeholder="Ссылка на картинку"
@@ -34,7 +64,8 @@ function App() {
         name='edit'
         title='Редактировать профиль'
         buttonSave='Сохранить'
-        onEditProfile=''
+        isOpen={isEditProfilePopupOpen}
+        onClose={closeAllPopups}
       >
         <label className="popup__label">
           <input name="name" type="text" id="username" minLength="2" maxLength="40"
@@ -53,7 +84,8 @@ function App() {
         name='add'
         title='Новое место'
         buttonSave='Создать'
-        onAddPlace=''
+        isOpen={isAddPlacePopupOpen}
+        onClose={closeAllPopups}
       >
         <label className="popup__label">
           <input name='name' type="text" id="namecard" minLength="2" maxLength="30" placeholder="Название"
@@ -72,7 +104,7 @@ function App() {
         name='delete'
         title='Вы уверены?'
         buttonSave='Да'
-        onAddPlace=''
+        onClose={closeAllPopups}
       />
 
       <ImagePopup />
