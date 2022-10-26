@@ -1,4 +1,7 @@
+import userEvent from '@testing-library/user-event';
+import { useInsertionEffect } from 'react';
 import editAvatar from '../images/editAvatar.png';
+import api from '../utils/Api';
 
 function deleteCard() {
   document.querySelector('.popup_type_delete').classList.add('popup_opened');
@@ -6,6 +9,14 @@ function deleteCard() {
 }
 
 function Main(props) {
+  const [userName, setUserName] = React.useState('');
+  const [userDescription, setUserDescription] = React.useState('');
+  const [userAvatar, setUserAvatar] = React.useState('');
+
+  useEffect(() => {
+    console.log('effect');
+  });
+
   return (
     <main className="content">
       <section className="profile">
@@ -14,10 +25,11 @@ function Main(props) {
           <div className="profile__avatar-icon">
             <img className="profile__avatar-edit" src={editAvatar} alt="Иконка карандаш"
               onClick={props.onEditAvatar}
-
             />
           </div>
-          <img className="profile__photo" alt="Фото профиля" />
+          <img className="profile__photo" alt="Фото профиля"
+            style={{ backgroundImage: `url(${userAvatar})` }}
+          />
         </div>
 
         <div className="profile__text-box">
