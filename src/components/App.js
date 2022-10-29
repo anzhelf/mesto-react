@@ -1,21 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import api from '../utils/Api';
 import ReactDOM from 'react-dom/client';
-
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
-
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
-
 import '../index.css';
 
 function App() {
+  const [cards, setCards] = React.useState([]);
 
+  useEffect(() => {
+    api.getInicialCards()
+      .then(data => {
+        setCards(data);
+      }).catch((err) => console.log(err));
+  });
 
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState('');
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
@@ -29,20 +36,29 @@ function App() {
     setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
   }
 
+  function handleCardClick(data) {
+    setIsImagePopupOpen(!selectedCard);
+    setSelectedCard(data);
+
+  }
+
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
+    setIsImagePopupOpen(false);
+    setSelectedCard('');
   }
 
   return (
     <div className="page">
-
       <Header />
       <Main
         onEditAvatar={handleEditAvatarClick}
         onEditProfile={handleEditProfileClick}
         onAddPlace={handleAddPlaceClick}
+        onCardClick={handleCardClick}
+        cards={cards}
       />
       <Footer />
 
@@ -107,7 +123,11 @@ function App() {
         onClose={closeAllPopups}
       />
 
-      <ImagePopup />
+      <ImagePopup
+        card={selectedCard}
+        isOpen={isImagePopupOpen}
+        onClose={closeAllPopups}
+      />
 
     </div>
   );

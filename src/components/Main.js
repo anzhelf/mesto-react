@@ -12,11 +12,11 @@ function deleteCard() {
 }
 
 function Main(props) {
-  const [cards, setCards] = React.useState([]);
-
   const [userName, setUserName] = React.useState('');
   const [userDescription, setUserDescription] = React.useState('');
   const [userAvatar, setUserAvatar] = React.useState('');
+
+  const cards = props.cards;
 
   useEffect(() => {
     api.getDdataUser()
@@ -24,13 +24,6 @@ function Main(props) {
         setUserName(data.name);
         setUserDescription(data.about);
         setUserAvatar(data.avatar);
-      }).catch((err) => console.log(err));
-  });
-
-  useEffect(() => {
-    api.getInicialCards()
-      .then(data => {
-        setCards(data);
       }).catch((err) => console.log(err));
   });
 
@@ -64,9 +57,11 @@ function Main(props) {
       </section>
 
       <section className="cards" aria-label="Блок с карточками мест">
+
         {
-          cards.map((card) => <Card key={card._id} id={card._id} name={card.name} link={card.link} likes={card.likes.length} />)
+          cards.map((card) => <Card key={card._id} id={card._id} name={card.name} link={card.link} likes={card.likes.length} onCardClick={props.onCardClick} />)
         }
+
       </section>
     </main>
   );
