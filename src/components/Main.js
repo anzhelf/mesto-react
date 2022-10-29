@@ -1,7 +1,10 @@
+import React, { useState, useEffect } from 'react';
 import userEvent from '@testing-library/user-event';
 import { useInsertionEffect } from 'react';
 import editAvatar from '../images/editAvatar.png';
 import api from '../utils/Api';
+import Card from './Card';
+import cardDelete from '../images/deleteCard.png';
 
 function deleteCard() {
   document.querySelector('.popup_type_delete').classList.add('popup_opened');
@@ -9,12 +12,26 @@ function deleteCard() {
 }
 
 function Main(props) {
+  const [cards, setCards] = React.useState([]);
+
   const [userName, setUserName] = React.useState('');
   const [userDescription, setUserDescription] = React.useState('');
   const [userAvatar, setUserAvatar] = React.useState('');
 
   useEffect(() => {
-    console.log('effect');
+    api.getDdataUser()
+      .then((data) => {
+        setUserName(data.name);
+        setUserDescription(data.about);
+        setUserAvatar(data.avatar);
+      }).catch((err) => console.log(err));
+  });
+
+  useEffect(() => {
+    api.getInicialCards()
+      .then(data => {
+        setCards(data);
+      }).catch((err) => console.log(err));
   });
 
   return (
@@ -28,17 +45,17 @@ function Main(props) {
             />
           </div>
           <img className="profile__photo" alt="Фото профиля"
-            style={{ backgroundImage: `url(${userAvatar})` }}
+            src={userAvatar}
           />
         </div>
 
         <div className="profile__text-box">
-          <h1 className="profile__title" aria-label="Имя профиля"></h1>
+          <h1 className="profile__title" aria-label="Имя профиля">{userName}</h1>
           <button className="profile__edit" aria-label="Кнопка редактировать информацию о себе"
             onClick={props.onEditProfile}
 
           ></button>
-          <p className="profile__subtitle"></p>
+          <p className="profile__subtitle">{userDescription}</p>
         </div>
 
         <button className="profile__button-add" aria-label="Кнопка добавить пост"
@@ -47,6 +64,9 @@ function Main(props) {
       </section>
 
       <section className="cards" aria-label="Блок с карточками мест">
+        {
+          cards.map((card) => <Card key={card._id} id={card._id} name={card.name} link={card.link} likes={card.likes.length} />)
+        }
       </section>
     </main>
   );
