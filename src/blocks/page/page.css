@@ -1,0 +1,15 @@
+.page {
+  max-width: 1280px;
+  min-width: 320px;
+  background-color: #000;
+  padding-top: 45px;
+  font-family: "Neue Machina", Arial, Helvetica, sans-serif;
+  margin: 0 auto;
+  color: #fff;
+}
+
+@media screen and (max-width: 320px) {
+  .page {
+    padding-top: 28px;
+  }
+}
