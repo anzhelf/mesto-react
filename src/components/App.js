@@ -23,6 +23,7 @@ function App() {
   useEffect(() => {
     api.getDdataUser()
       .then(data => {
+        setCurrentUser(data);
         console.log(data);
       })
       .catch((err) => console.log(err));
