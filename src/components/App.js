@@ -14,13 +14,27 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
-  const [selectedCard, setSelectedCard] = useState(null);
+  const [selectedCard, setSelectedCard] = useState({});
+
+  const [currentUser, setCurrentUser] = useState({});
+
+  //console.log(currentUser);
+
+  useEffect(() => {
+    api.getDdataUser()
+      .then(data => {
+        console.log(data);
+      })
+      .catch((err) => console.log(err));
+
+  }, []);
 
   useEffect(() => {
     api.getInicialCards()
       .then(data => {
         setCards(data);
-      }).catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   function handleEditAvatarClick() {
@@ -36,7 +50,7 @@ function App() {
   }
 
   function handleCardClick(data) {
-    setIsImagePopupOpen(!selectedCard);
+    setIsImagePopupOpen(!isImagePopupOpen);
     setSelectedCard(data);
 
   }
@@ -46,7 +60,7 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsImagePopupOpen(false);
-    setSelectedCard(null);
+    setSelectedCard({});
   }
 
   return (
