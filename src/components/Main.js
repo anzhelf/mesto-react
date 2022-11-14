@@ -1,24 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import userEvent from '@testing-library/user-event';
 import { useInsertionEffect } from 'react';
 import editAvatar from '../images/editAvatar.png';
 import api from '../utils/Api';
 import Card from './Card';
-import cardDelete from '../images/deleteCard.png';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Main({ cards, ...props }) {
-  const [userName, setUserName] = useState('');
-  const [userDescription, setUserDescription] = useState('');
-  const [userAvatar, setUserAvatar] = useState('');
 
-  useEffect(() => {
-    api.getDdataUser()
-      .then((data) => {
-        setUserName(data.name);
-        setUserDescription(data.about);
-        setUserAvatar(data.avatar);
-      }).catch((err) => console.log(err));
-  }, []);
+  const dataUser = React.useContext(CurrentUserContext);
+  //console.log(dataUser);
 
   return (
     <main className="content">
@@ -31,17 +22,17 @@ function Main({ cards, ...props }) {
             />
           </div>
           <img className="profile__photo" alt="Фото профиля"
-            src={userAvatar}
+            src={dataUser.avatar}
           />
         </div>
 
         <div className="profile__text-box">
-          <h1 className="profile__title" aria-label="Имя профиля">{userName}</h1>
+          <h1 className="profile__title" aria-label="Имя профиля">{dataUser.name}</h1>
           <button className="profile__edit" aria-label="Кнопка редактировать информацию о себе"
             onClick={props.onEditProfile}
 
           ></button>
-          <p className="profile__subtitle">{userDescription}</p>
+          <p className="profile__subtitle">{dataUser.about}</p>
         </div>
 
         <button className="profile__button-add" aria-label="Кнопка добавить пост"
