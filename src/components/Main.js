@@ -5,11 +5,13 @@ import editAvatar from '../images/editAvatar.png';
 import api from '../utils/Api';
 import Card from './Card';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import { CardsContext } from '../contexts/CardsContext';
 
-function Main({ cards, ...props }) {
+function Main(props) {
 
-  const dataUser = React.useContext(CurrentUserContext);
-  //console.log(dataUser);
+  const currentUser = React.useContext(CurrentUserContext);
+  //
+  const cards = React.useContext(CardsContext);
 
   return (
     <main className="content">
@@ -22,17 +24,17 @@ function Main({ cards, ...props }) {
             />
           </div>
           <img className="profile__photo" alt="Фото профиля"
-            src={dataUser.avatar}
+            src={currentUser.avatar}
           />
         </div>
 
         <div className="profile__text-box">
-          <h1 className="profile__title" aria-label="Имя профиля">{dataUser.name}</h1>
+          <h1 className="profile__title" aria-label="Имя профиля">{currentUser.name}</h1>
           <button className="profile__edit" aria-label="Кнопка редактировать информацию о себе"
             onClick={props.onEditProfile}
 
           ></button>
-          <p className="profile__subtitle">{dataUser.about}</p>
+          <p className="profile__subtitle">{currentUser.about}</p>
         </div>
 
         <button className="profile__button-add" aria-label="Кнопка добавить пост"
@@ -43,7 +45,8 @@ function Main({ cards, ...props }) {
       <section className="cards" aria-label="Блок с карточками мест">
 
         {
-          cards.map((card) => (<Card key={card._id} id={card._id} name={card.name} link={card.link} likes={card.likes.length} onCardClick={props.onCardClick} />))
+          cards.map((card) => (<Card key={card._id} card={card} onCardClick={props.onCardClick} />))
+
         }
 
       </section>
@@ -52,3 +55,5 @@ function Main({ cards, ...props }) {
 }
 
 export default Main;
+
+//id={card._id} name={card.name} link={card.link} likes={card.likes.length}
