@@ -1,7 +1,6 @@
 import React from 'react';
 import cardDelete from '../images/deleteCard.png';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
-import api from '../utils/Api';
 
 function Card(props) {
   const card = props.card;
@@ -23,7 +22,6 @@ function Card(props) {
 
   function handleDeleteClick() {
     props.onCardDelete(card);
-    console.log('del');
   }
 
   return (

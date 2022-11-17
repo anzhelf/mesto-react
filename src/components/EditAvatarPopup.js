@@ -1,6 +1,5 @@
 import React, { useState, useEffect, createContext, useContext } from 'react';
 import PopupWithForm from './PopupWithForm';
-//import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function EditAvatarPopup(props) {
   const [avatar, setAvatar] = useState('');
