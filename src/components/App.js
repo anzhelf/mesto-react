@@ -6,6 +6,8 @@ import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
+import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
 import '../index.css';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
@@ -53,6 +55,28 @@ function App() {
     setSelectedCard({});
   }
 
+  function handleUpdateUser(data) {
+    api.editDdataUser(data.name, data.about)
+      .then(data => {
+        setCurrentUser(data);
+      })
+      .then(() => {
+        closeAllPopups();
+      })
+      .catch((err) => console.log(err));
+  }
+
+  function handleUpdateAvatar(data) {
+    api.editAvatarUser(data.avatar)
+      .then(data => {
+        setCurrentUser(data);
+      })
+      .then(() => {
+        closeAllPopups();
+      })
+      .catch((err) => console.log(err));
+  }
+
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
@@ -66,39 +90,17 @@ function App() {
         />
         <Footer />
 
-        <PopupWithForm
-          name='avatar'
-          title='Обновить аватар'
-          buttonSave='Сохранить'
+        <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
-        >
-          <label className="popup__label popup__label_last-element">
-            <input name='avatar' type="url" id="avatar" placeholder="Ссылка на картинку"
-              className="popup__input popup__input_type_avatar" required />
-            <span className="avatar-input-error popup__input-error-job"></span>
-          </label>
-        </PopupWithForm>
+          onUpdateAvatar={handleUpdateAvatar}
+        />
 
-        <PopupWithForm
-          name='edit'
-          title='Редактировать профиль'
-          buttonSave='Сохранить'
+        <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
-        >
-          <label className="popup__label">
-            <input name="name" type="text" id="username" minLength="2" maxLength="40"
-              placeholder="Имя" className="popup__input popup__input_type_name" required />
-            <span className="username-input-error popup__input-error-name"></span>
-          </label>
-
-          <label className="popup__label popup__label_last-element">
-            <input name="about" type="text" id="biography" minLength="2" maxLength="200" placeholder="Работа" className="popup__input popup__input_type_job" required />
-            <span className="biography-input-error popup__input-error-job"></span>
-          </label>
-
-        </PopupWithForm>
+          onUpdateUser={handleUpdateUser}
+        />
 
         <PopupWithForm
           name='add'
@@ -132,10 +134,8 @@ function App() {
           isOpen={isImagePopupOpen}
           onClose={closeAllPopups}
         />
-
       </CurrentUserContext.Provider>
     </div>
-
   );
 }
 
