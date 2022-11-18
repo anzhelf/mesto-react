@@ -17,7 +17,7 @@ class Api {
     return fetch(url, options).then(this._checkResponse);
   }
 
-  getDdataUser() {
+  getDataUser() {
     return this._request(`${this._url}/users/me`, {
       method: 'GET',
       headers: this._headers
@@ -34,7 +34,7 @@ class Api {
     });
   }
 
-  editDdataUser(name, about) {
+  editDataUser(name, about) {
     return this._request(`${this._url}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
@@ -45,7 +45,7 @@ class Api {
     });
   }
 
-  getInicialCards() {
+  getInitialCards() {
     return this._request(`${this._url}/cards `, {
       method: 'GET',
       headers: this._headers
@@ -63,22 +63,22 @@ class Api {
     });
   }
 
-  deleteLikeCard(_id) {
-    return this._request(`${this._url}/cards/${_id}/likes`, {
+  deleteLikeCard(id) {
+    return this._request(`${this._url}/cards/${id}/likes`, {
       method: 'DELETE',
       headers: this._headers,
     });
   }
 
-  likeCard(_id) {
-    return this._request(`${this._url}/cards/${_id}/likes`, {
+  likeCard(id) {
+    return this._request(`${this._url}/cards/${id}/likes`, {
       method: 'PUT',
       headers: this._headers,
     });
   }
 
-  deliteCard(_id) {
-    return this._request(`${this._url}/cards/${_id}`, {
+  deleteCard(id) {
+    return this._request(`${this._url}/cards/${id}`, {
       method: 'DELETE',
       headers: this._headers,
     });

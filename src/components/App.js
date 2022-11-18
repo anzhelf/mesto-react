@@ -24,7 +24,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
 
   useEffect(() => {
-    api.getDdataUser()
+    api.getDataUser()
       .then(data => {
         setCurrentUser(data);
       })
@@ -33,7 +33,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    api.getInicialCards()
+    api.getInitialCards()
       .then(data => {
         setCards(data);
       })
@@ -55,7 +55,6 @@ function App() {
   function handleCardClick(data) {
     setIsImagePopupOpen(!isImagePopupOpen);
     setSelectedCard(data);
-
   }
 
   function handleCardLike(card) {
@@ -77,8 +76,8 @@ function App() {
   }
 
   function handleCardDelete(card) {
-    api.deliteCard(card._id);
-    api.getInicialCards()
+    api.deleteCard(card._id);
+    api.getInitialCards()
       .then(() => {
         setCards((data) => data.filter((c) => c._id !== card._id));
       })
@@ -94,7 +93,7 @@ function App() {
   }
 
   function handleUpdateUser(data) {
-    api.editDdataUser(data.name, data.about)
+    api.editDataUser(data.name, data.about)
       .then(data => {
         setCurrentUser(data);
       })
