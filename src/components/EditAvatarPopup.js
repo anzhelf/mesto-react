@@ -4,6 +4,10 @@ import PopupWithForm from './PopupWithForm';
 function EditAvatarPopup(props) {
   const [avatar, setAvatar] = useState('');
 
+  React.useEffect(() => {
+    setAvatar('');
+  }, [props.isOpen]);
+
   function handleAvatarProfile(e) {
     setAvatar(e.target.value);
   }
@@ -14,8 +18,6 @@ function EditAvatarPopup(props) {
     props.onUpdateAvatar({
       avatar: avatar
     });
-
-    setAvatar('');
   }
 
   return (

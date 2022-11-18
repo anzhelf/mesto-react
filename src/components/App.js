@@ -38,27 +38,27 @@ function App() {
         setCards(data);
       })
       .catch((err) => console.log(err));
-  }, [cards]);
+  }, []);
 
   function handleEditAvatarClick() {
-    setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
+    setIsEditAvatarPopupOpen(true);
   }
 
   function handleEditProfileClick() {
-    setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
+    setIsEditProfilePopupOpen(true);
   }
 
   function handleAddPlaceClick() {
-    setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
+    setIsAddPlacePopupOpen(true);
   }
 
   function handleCardClick(data) {
-    setIsImagePopupOpen(!isImagePopupOpen);
+    setIsImagePopupOpen(true);
     setSelectedCard(data);
   }
 
   function handleCardLike(card) {
-    // Снова проверяем, есть ли уже лайк на этой карточке
+    // Снова проверяем, есть ли уже лайк на этой карточке 
     const isLiked = card.likes.some(i => i._id === currentUser._id);
 
     if (!isLiked) {
@@ -67,8 +67,9 @@ function App() {
     else {
       api.deleteLikeCard(card._id);
     }
-    // Отправляем запрос в API и получаем обновлённые данные карточки
-    api.getInicialCards()
+
+    // Отправляем запрос в API и получаем обновлённые данные карточки 
+    api.getInitialCards()
       .then((newCard) => {
         setCards(newCard);
       })

@@ -2,8 +2,7 @@ import React from 'react';
 import cardDelete from '../images/deleteCard.png';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
-function Card(props) {
-  const card = props.card;
+function Card({ card, ...props }) {
   const currentUser = React.useContext(CurrentUserContext);
 
   // Определяем, являемся ли мы владельцем текущей карточки

@@ -9,7 +9,7 @@ function EditProfilePopup(props) {
   React.useEffect(() => {
     setNameProfile(currentUser.name);
     setDescription(currentUser.about);
-  }, [currentUser]);
+  }, [props.isOpen]);
 
   const [nameProfile, setNameProfile] = useState(currentUser.name);
   const [description, setDescription] = useState(currentUser.about);
@@ -40,13 +40,13 @@ function EditProfilePopup(props) {
       onSubmit={handleSubmit}
     >
       <label className="popup__label">
-        <input onChange={handleNameProfile} value={nameProfile} name="name" type="text" id="username" minLength="2" maxLength="40"
+        <input onChange={handleNameProfile} value={nameProfile || ''} name="name" type="text" id="username" minLength="2" maxLength="40"
           placeholder="Имя" className="popup__input popup__input_type_name" required />
         <span className="username-input-error popup__input-error-name"></span>
       </label>
 
       <label className="popup__label popup__label_last-element">
-        <input onChange={handleDescription} value={description} name="about" type="text" id="biography" minLength="2" maxLength="200" placeholder="Работа" className="popup__input popup__input_type_job" required />
+        <input onChange={handleDescription} value={description || ''} name="about" type="text" id="biography" minLength="2" maxLength="200" placeholder="Работа" className="popup__input popup__input_type_job" required />
         <span className="biography-input-error popup__input-error-job"></span>
       </label>
 
