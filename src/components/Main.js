@@ -6,6 +6,15 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 function Main({ cards, ...props }) {
   const currentUser = useContext(CurrentUserContext);
 
+  const cardsElements = cards.map((card) => (
+    <Card
+      key={card._id}
+      card={card}
+      onCardDelete={props.onCardDelete}
+      onCardLike={props.onCardLike}
+      onCardClick={props.onCardClick}
+    />))
+
   return (
     <main className="content">
       <section className="profile">
@@ -36,9 +45,7 @@ function Main({ cards, ...props }) {
       </section>
 
       <section className="cards" aria-label="Блок с карточками мест">
-        {
-          cards.map((card) => (<Card key={card._id} card={card} onCardDelete={props.onCardDelete} onCardLike={props.onCardLike} onCardClick={props.onCardClick} />))
-        }
+        {cardsElements}
       </section>
     </main>
   );
