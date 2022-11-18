@@ -24,18 +24,12 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
 
   useEffect(() => {
-    api.getDataUser()
-      .then(data => {
-        setCurrentUser(data);
-      })
-      .catch((err) => console.log(err));
-
-  }, []);
-
-  useEffect(() => {
-    api.getInitialCards()
-      .then(data => {
-        setCards(data);
+    Promise.all([api.getDataUser(), api.getInitialCards()])
+      .then(([dataUser, dataCards]) => {
+        setCurrentUser(dataUser);
+        console.log(dataUser);
+        console.log(dataCards);
+        setCards(dataCards);
       })
       .catch((err) => console.log(err));
   }, []);
