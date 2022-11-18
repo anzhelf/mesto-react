@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import api from '../utils/Api';
 import ReactDOM from 'react-dom/client';
 import Header from './Header';
@@ -108,8 +108,6 @@ function App() {
     api.editAvatarUser(data.avatar)
       .then(data => {
         setCurrentUser(data);
-      })
-      .then(() => {
         closeAllPopups();
       })
       .catch((err) => console.log(err));
@@ -119,8 +117,6 @@ function App() {
     api.addNewCard(data.name, data.link)
       .then(newCard => {
         setCards([newCard, ...cards]);
-      })
-      .then(() => {
         closeAllPopups();
       })
       .catch((err) => console.log(err));
@@ -175,5 +171,4 @@ function App() {
     </div>
   );
 }
-
 export default App;

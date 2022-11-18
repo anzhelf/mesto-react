@@ -1,12 +1,12 @@
-import React, { useState, useEffect, createContext, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import PopupWithForm from './PopupWithForm';
 
-function EditAvatarPopup(props) {
+function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
   const [avatar, setAvatar] = useState('');
 
-  React.useEffect(() => {
+  useEffect(() => {
     setAvatar('');
-  }, [props.isOpen]);
+  }, [isOpen]);
 
   function handleAvatarProfile(e) {
     setAvatar(e.target.value);
@@ -15,7 +15,7 @@ function EditAvatarPopup(props) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    props.onUpdateAvatar({
+    onUpdateAvatar({
       avatar: avatar
     });
   }
@@ -25,13 +25,20 @@ function EditAvatarPopup(props) {
       name='avatar'
       title='Обновить аватар'
       buttonSave='Сохранить'
-      isOpen={props.isOpen}
-      onClose={props.onClose}
+      isOpen={isOpen}
+      onClose={onClose}
       onSubmit={handleSubmit}
     >
       <label className="popup__label popup__label_last-element">
-        <input onChange={handleAvatarProfile} value={avatar} name='avatar' type="url" id="avatar" placeholder="Ссылка на картинку"
-          className="popup__input popup__input_type_avatar" required />
+        <input
+          onChange={handleAvatarProfile}
+          value={avatar}
+          name='avatar'
+          type="url"
+          id="avatar"
+          placeholder="Ссылка на картинку"
+          className="popup__input popup__input_type_avatar"
+          required />
         <span className="avatar-input-error popup__input-error-job"></span>
       </label>
     </PopupWithForm>
