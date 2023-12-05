@@ -29,7 +29,7 @@
 
 Чтобы склонировать проект к себе на компьютер, выполните:
 
-### `git clone git@github.com:anzhelf/mesto.git`
+### `git clone git@github.com:anzhelf/mesto-react.git`
 
 Установите зависимости:
 
