@@ -14,7 +14,7 @@
 - сохранены асинхронные GET- и POST-запросы к API и весь функционал.
 
 ## Инструменты и стек:
-`HTML5` `CSS3` `JS` `BEM` `Flexbox` `Grid` `ООП` `API` `React` `JSX`
+`HTML5` `CSS3` `JS` `BEM` `Flex` `Grid` `ООП` `API` `React` `JSX`
 
 Макет проекта: [Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1).
 
