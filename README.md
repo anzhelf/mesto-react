@@ -2,7 +2,7 @@
 
 ## Мини-соцсеть с возможностями:
 
-Проект [Mesto](https://github.com/anzhelf/mesto) портирован на React.
+Продолжение проекта [Mesto](https://github.com/anzhelf/mesto) - портирование на React.
 
 - обновление своих данных;
 - операции с карточками.
