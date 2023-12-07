@@ -5,7 +5,7 @@
 Продолжение проекта [Mesto](https://github.com/anzhelf/mesto) - портирование на React.
 
 - обновление своих данных;
-- операции с карточками.
+- операции с карточками;
 
 ## В ходе разработки:
 
@@ -22,6 +22,7 @@
 
 ## Продолжение работы над проектом:
 
+- [Авторизация и регистрация на React](https://github.com/anzhelf/react-mesto-auth).
 - [Бекенд для проекта Mesto](https://github.com/anzhelf/express-mesto-gha).
 - [Репозиторий для деплоя проекта Mesto на сервер Фронтенд + Бекенд](https://github.com/anzhelf/react-mesto-api-full-gha).
 
@@ -41,7 +42,7 @@
 
 В каталоге проекта вы можете запустить:
 
-### `npm run dev`
+### `npm start`
 
 Эта команда запустит приложение в браузере на http://localhost:3000.
 
